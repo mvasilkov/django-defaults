@@ -1,0 +1,9 @@
+# Python
+
+__pycache__/
+django_defaults.egg-info/
+
+# IntelliJ
+
+.idea/
+django-defaults.iml
