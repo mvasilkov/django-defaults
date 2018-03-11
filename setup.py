@@ -23,7 +23,7 @@ if __name__ == '__main__':
               'Programming Language :: Python :: 3 :: Only',
           ],
 
-          keywords='django settings',
+          keywords='django settings toml',
 
           packages=find_packages(),
 

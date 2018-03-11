@@ -2,6 +2,6 @@
 Django settings sans boilerplate
 """
 
-from .functions import emplace
+from .functions import emplace, setenv
 
-__all__ = ['emplace']
+__all__ = ['emplace', 'setenv']

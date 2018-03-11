@@ -9,7 +9,7 @@ OPTIONS_FILE = 'defaults.toml'
 
 
 @utils.run_once
-def initialize(start_py: str, debug: bool = False):
+def initialize(start_py: str, debug: bool = False, finalize_settings: bool = True):
     options_path = find_options_file(start_py)
     options = toml.load(options_path.as_posix())
 
@@ -20,6 +20,9 @@ def initialize(start_py: str, debug: bool = False):
         raise RuntimeError(f'Improperly configured {OPTIONS_FILE}') from err
 
     settings.DJANGO_ROOT = options_path.parent
+
+    if not finalize_settings:
+        return
 
     settings.finalize(debug=debug)
 
@@ -43,7 +46,7 @@ def find_options_file(start_py: str = __file__) -> Path:
         p2 = p
 
 
-def emplace(*, debug: bool):
+def emplace(*, debug: bool = True):
     """
     Copy settings from the `defaults.settings` module to this function's callsite.
     """
@@ -57,3 +60,14 @@ def emplace(*, debug: bool):
     for a in dir(settings):
         if utils.should_copy(a):
             setattr(module, a, getattr(settings, a))
+
+
+def setenv(*, bundled: bool = False):
+    if not bundled:
+        frame = inspect.stack()[1]
+
+        initialize(frame.filename, finalize_settings=False)
+
+    assert settings.SETTINGS_MODULE is not None
+
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings.SETTINGS_MODULE)
