@@ -21,6 +21,7 @@ if __name__ == '__main__':
               'License :: OSI Approved :: MIT License',
               'Programming Language :: Python :: 3',
               'Programming Language :: Python :: 3 :: Only',
+              'Programming Language :: Python :: Implementation :: CPython',
           ],
 
           keywords='django settings toml',
