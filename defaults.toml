@@ -1,0 +1,3 @@
+[django]
+settings-module = '{{ project_name }}.settings'
+routes-module = '{{ project_name }}.routes'
