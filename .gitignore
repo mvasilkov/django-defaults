@@ -2,8 +2,14 @@
 
 __pycache__/
 django_defaults.egg-info/
+build/
+dist/
 
 # IntelliJ
 
 .idea/
 django-defaults.iml
+
+# VS Code
+
+.vscode/
